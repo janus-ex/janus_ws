@@ -1,1 +1,1 @@
-for interacting with janus gateway via unix socket
+for interacting with janus gateway via websockets
