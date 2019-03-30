@@ -4,11 +4,17 @@ defmodule Janus.WS do
 
   defstruct [:registry, pending_txs: %{}]
 
-  @type client :: WebSockex.Conn.t()
+  @type client :: WebSockex.client()
   @type session_id :: integer
   @type handle_id :: integer
   @type tx_id :: String.t()
-  @type send_result :: {:ok, tx_id} | {:error, any}
+  @type send_result ::
+          {:ok, tx_id}
+          | {:error,
+             %WebSockex.FrameEncodeError{}
+             | %WebSockex.ConnError{}
+             | %WebSockex.NotConnectedError{}
+             | %WebSockex.InvalidFrameError{}}
 
   @doc """
   Example:
