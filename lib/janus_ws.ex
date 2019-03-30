@@ -163,7 +163,7 @@ defmodule Janus.WS do
   end
 
   @spec _broadcast(module, session_id(), map) :: :ok
-  def _broadcast(registry, session_id, message) when not is_nil(registry) do
+  defp _broadcast(registry, session_id, message) when not is_nil(registry) do
     Registry.dispatch(registry, session_id, fn entries ->
       Enum.each(entries, fn {pid, _} ->
         send(pid, message)
@@ -172,7 +172,7 @@ defmodule Janus.WS do
   end
 
   @spec tx_id :: tx_id
-  def tx_id do
+  defp tx_id do
     8
     |> :crypto.strong_rand_bytes()
     |> Base.encode64(padding: false)
