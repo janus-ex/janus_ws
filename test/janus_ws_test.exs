@@ -190,13 +190,12 @@ defmodule Janus.WSTest do
       "transaction" => ^tx_id
     }
 
-    # TODO
     assert {:ok, _tx_id} = Janus.send_keepalive(client, session_id)
 
     refute_receive _anything_else
   end
 
-  # TODO
+  # TODO smaller
   @jsep %{
     "type" => "offer",
     "sdp" =>
@@ -266,11 +265,10 @@ defmodule Janus.WSTest do
 
     sdp = String.split(sdp)
 
-    # TODO
+    # TODO not particularly reassuring
     assert "v=0" in sdp
     assert "janus" in sdp
 
-    # TODO
     assert {:ok, tx_id} = Janus.send_trickle_candidate(client, session_id, handle_id, @candidate)
 
     assert_receive %{"janus" => "ack", "session_id" => ^session_id, "transaction" => ^tx_id}
