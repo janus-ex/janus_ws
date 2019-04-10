@@ -26,7 +26,8 @@ defmodule Janus.WS do
   def start_link(opts) do
     websockex_opts = [
       name: opts[:name],
-      extra_headers: [{"Sec-WebSocket-Protocol", "janus-protocol"}]
+      extra_headers: [{"Sec-WebSocket-Protocol", "janus-protocol"}],
+      debug: opts[:debug]
     ]
 
     websockex_opts = Enum.reject(websockex_opts, fn {_k, v} -> is_nil(v) end)
