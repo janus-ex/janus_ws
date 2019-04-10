@@ -2,6 +2,6 @@
 
 For interacting with [Janus WebRTC Gateway](https://github.com/meetecho/janus-gateway) via WebSockets.
 
-## Example project
+#### Example project
 
 https://github.com/janus-ex/janus_ws_example
