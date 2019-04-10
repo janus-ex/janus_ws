@@ -51,7 +51,7 @@ defmodule Janus.WS do
 
       %{"transaction" => transaction} = msg ->
         {maybe_from, pending_txs} = Map.pop(pending_txs, transaction)
-        if maybe_from, do: send(maybe_from, msg)
+        if maybe_from, do: send(maybe_from, {:janus_ws, msg})
         {:ok, %{state | pending_txs: pending_txs}}
     end
   end
@@ -166,7 +166,7 @@ defmodule Janus.WS do
   defp _broadcast(registry, session_id, message) when not is_nil(registry) do
     Registry.dispatch(registry, session_id, fn entries ->
       Enum.each(entries, fn {pid, _} ->
-        send(pid, message)
+        send(pid, {:janus_ws, message})
       end)
     end)
   end
